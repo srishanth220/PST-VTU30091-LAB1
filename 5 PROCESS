@@ -1,0 +1,84 @@
+1.PROCESS SALARY
+import java.util.function.Function;
+public class HigherOrderFunctionExample{
+    static void processSalary(double salary,Function<Double, Double>operation){
+        double result = operation.apply(salary);
+        System.out.println("Update Salary: " + result);
+    }
+    public static void main(String[]args){
+        double salary = 50000;
+        
+        processSalary(salary, s -> s+(s*0.10));
+        
+        processSalary(salary, s -> s+5000);
+        
+        processSalary(salary, s -> s-(s*0.10));
+    }
+}
+2.PROCESS ORDER
+import java.util.function.Function;
+
+public class CustomerOrderFunctionExample {
+
+    static void processOrder(double amount, Function<Double, Double> operation) {
+        double result = operation.apply(amount);
+        System.out.println("Final Amount: " + result);
+    }
+
+    public static void main(String[] args) {
+
+        double amount = 1000;
+
+        // First Order - 10% Discount
+        processOrder(amount, a -> a - (a * 0.10));
+
+        // Second Order - 20% Discount
+        processOrder(amount, a -> a - (a * 0.20));
+
+        // Third Order onwards - No Discount
+        processOrder(amount, a -> a);
+    }
+}
+3.IMPLEMENT MAP FUNCTION
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Integer> salaries = Arrays.asList(10000, 20000, 30000);
+
+        salaries.stream()
+                .map(salary -> salary + (salary * 10 / 100))
+                .forEach(System.out::println);
+    }
+}
+4.REDUCE PROCESS
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Integer> salaries = Arrays.asList(10000, 20000, 30000, 40000, 50000);
+
+        int totalSalary = salaries.stream()
+                                  .reduce(0, (a, b) -> a + b);
+
+        System.out.println("Total Salary = " + totalSalary);
+    }
+}
+5.FILTER PROCESS
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<Integer> salaries = Arrays.asList(10000, 20000, 30000, 40000, 50000);
+
+        salaries.stream()
+                .filter(salary -> salary > 20000)
+                .forEach(System.out::println);
+    }
+}
