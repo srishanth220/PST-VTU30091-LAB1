@@ -1,0 +1,89 @@
+import java.util.*;
+
+interface PerformOperation {
+    boolean check(int a);
+}
+
+public class Solution {
+
+    public static PerformOperation isOdd() {
+        return a -> a % 2 != 0;
+    }
+
+    public static PerformOperation isPrime() {
+        return a -> {
+            if (a < 2) {
+                return false;
+            }
+
+            for (int i = 2; i <= a / i; i++) {
+                if (a % i == 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+    }
+
+    public static PerformOperation isPalindrome() {
+        return a -> {
+            int original = a;
+            int reversed = 0;
+
+            while (a > 0) {
+                reversed = reversed * 10 + a % 10;
+                a /= 10;
+            }
+
+            return original == reversed;
+        };
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
+
+        while (T-- > 0) {
+            int condition = sc.nextInt();
+            int number = sc.nextInt();
+
+            PerformOperation operation;
+
+            if (condition == 1) {
+                operation = isOdd();
+                System.out.println(operation.check(number) ? "ODD" : "EVEN");
+
+            } else if (condition == 2) {
+                operation = isPrime();
+                System.out.println(operation.check(number) ? "PRIME" : "COMPOSITE");
+
+            } else if (condition == 3) {
+                operation = isPalindrome();
+                System.out.println(operation.check(number) ? "PALINDROME" : "NOT PALINDROME");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+Compiler Message
+Success
+Input (stdin)
+5
+1 4
+2 5
+3 898
+1 3
+2 12
+Expected Output
+EVEN
+PRIME
+PALINDROME
+ODD
+COMPOSITE
+
+https://www.hackerrank.com/challenges/java-lambda-expressions/problem  
+
