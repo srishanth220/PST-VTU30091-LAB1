@@ -1,0 +1,45 @@
+import sys
+
+def solve():
+    input = sys.stdin.read
+    data = input().split()
+    if not data:
+        return
+    
+    t = int(data[0])
+    results = []
+    
+    for i in range(1, t + 1):
+        s = data[i]
+        n = len(s)
+        
+        # Split string into two halves (ignoring the middle character if odd)
+        left = sorted(s[:n // 2])
+        right = sorted(s[(n + 1) // 2:])
+        
+        if left == right:
+            results.append("YES")
+        else:
+            results.append("NO")
+            
+    print('\n'.join(results))
+
+if __name__ == '__main__':
+    solve()
+
+Sample Input
+6
+gaga
+abcde
+rotor
+xyzxy
+abbaab
+ababc
+Your Output
+YES
+NO
+YES
+YES
+NO
+NO
+    
